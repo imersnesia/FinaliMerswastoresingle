@@ -2007,6 +2007,12 @@
             if (res.success) { closeModal('userModal'); showGlobalAlert(res.message, true); fetchUsersData(); } else alert(res.message);
         });
 
+        async function deleteUser(id) {
+            if (!confirm("Yakin hapus akun kasir ini secara permanen?")) return;
+            const res = await apiCall('delete_user', { target_user_id: id });
+            if (res.success) fetchUsersData(); else alert(res.message);
+        }
+
         document.getElementById('settingForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btnSaveSetText');
